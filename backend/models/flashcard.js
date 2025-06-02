@@ -5,12 +5,15 @@ const Schema = mongoose.Schema;
 // create a schema
 const flashcardSchema = new Schema({
     // Simple declaration of datatype that will be used:
-    word: {
+    front: {
         required:true,
         unique:true,
         type: String
     },
-    definition:String
+    back:{
+        required:true,
+        type:String
+    }
 });
 
 

@@ -6,7 +6,8 @@ const routes = require('./routes/routes')
 const database = require('./my-database');
 
 const app = express()
-const port = 3000
+const port = 5174
+
 
 app.use(cors())
 app.use(bodyParser.json())

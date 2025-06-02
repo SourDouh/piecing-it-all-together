@@ -6,11 +6,11 @@ const database = 'flashcards';      // Since we made our schema into a model, th
 
 class Database {
   constructor() {
-    this._connect()
-  }
-
+    const connection = this._connect()
+    //connection.dropCollection('flashcards')
+    }
 _connect() {
-     mongoose.connect(`mongodb://${server}/${database}`, { useNewUrlParser: true, useUnifiedTopology: true })
+     return mongoose.connect(`mongodb://${server}/${database}`, { useNewUrlParser: true, useUnifiedTopology: true })
        .then(dbSuccess())
        .catch(err => {
          console.error('Database connection error')
@@ -20,6 +20,7 @@ _connect() {
 
 function dbSuccess(){
   console.log('Database connection successful')
+
 }
 
 //creates a new database object

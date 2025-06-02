@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 //Read/get by id
 router.get('/:id', async (req, res) => {
   try {
-    const card = await Product.findById(req.params.id);
+    const card = await FlashcardSchema.findById(req.body.id);
     console.log("found card")
     console.log(card)
     res.json(card);
@@ -30,10 +30,22 @@ router.get('/:id', async (req, res) => {
 
 
 //we will be using the '/add' to do a POST request
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
+  console.log("trying to do a post request (routes.js)")
    try{
-    const card = new FlashcardSchema(req.params)
-    const saved = card.save()
+    console.log('---------------------------------------------------')
+    console.log(req.body)
+    console.log('---------------------------------------------------')
+    const card = new FlashcardSchema(req.body)
+    console.log('---------------------------------------------------')
+    console.log(card)
+    console.log('---------------------------------------------------')
+    console.log(await card.save())
+    console.log('---------------------------------------------------')
+    const saved = await card.save()
+    console.log('---------------------------------------------------')
+    console.log(saved)
+    console.log('---------------------------------------------------')
     res.json(saved)
    }catch(e){
     console.log(e)
@@ -45,7 +57,7 @@ router.post('/add', (req, res) => {
 router.put('/update/:id', async (req, res) => {
   try{
     const card = await FlashcardSchema.findByIdAndUpdate(
-      req.params.id,
+      req.body.id,
       { $set: req.body },
       { new: true }
     )
@@ -58,7 +70,7 @@ router.put('/update/:id', async (req, res) => {
 //TODO: change '/' below to be by id
 router.delete('/delete/:id', async(req, res) => {
   try {
-    await FlashcardSchema.findByIdAndDelete(req.params.id);
+    await FlashcardSchema.findByIdAndDelete(req.body.id);
     res.json({ msg: 'Flashcard Deleted' });
   } catch (e) {
     console.log(e)
