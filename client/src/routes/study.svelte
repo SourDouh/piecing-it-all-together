@@ -2,20 +2,12 @@
     import { onMount } from 'svelte'; 
     let cards=$state([])
     async function fetchData(){
-        console.log("test-----------------------------------")
         try{
-            console.log("test2-----------------------------------")
             const data = await fetch('http://localhost:5174');
-            console.log(data)
-            console.log("test3-----------------------------------")
             cards= await data.json()
-            console.log("test4-----------------------------------")
-
-            console.log($state.snapshot(cards))
         }catch(e){
             console.log(e)
         }
-
     }
     onMount(() => {
       fetchData()
@@ -29,14 +21,14 @@
     function nextCard(){
         if (index<cards.length-1){
             index++
+            showBack=false
         }
-        showBack=false
     }
     function prevCard(){
         if (index>0){
             index--
+            showBack=false
         }
-        showBack=false
     }
     
 </script>
