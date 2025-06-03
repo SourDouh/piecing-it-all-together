@@ -33,19 +33,12 @@ router.get('/:id', async (req, res) => {
 router.post('/add', async (req, res) => {
   console.log("trying to do a post request (routes.js)")
    try{
-    console.log('---------------------------------------------------')
     console.log(req.body)
-    console.log('---------------------------------------------------')
     const card = new FlashcardSchema(req.body)
-    console.log('---------------------------------------------------')
     console.log(card)
-    console.log('---------------------------------------------------')
     console.log(await card.save())
-    console.log('---------------------------------------------------')
     const saved = await card.save()
-    console.log('---------------------------------------------------')
     console.log(saved)
-    console.log('---------------------------------------------------')
     res.json(saved)
    }catch(e){
     console.log(e)
@@ -68,9 +61,9 @@ router.put('/update/:id', async (req, res) => {
 })
 
 //TODO: change '/' below to be by id
-router.delete('/delete/:id', async(req, res) => {
+router.delete('/delete/', async(req, res) => {
   try {
-    await FlashcardSchema.findByIdAndDelete(req.body.id);
+    await FlashcardSchema.findByIdAndDelete(req.body._id);
     res.json({ msg: 'Flashcard Deleted' });
   } catch (e) {
     console.log(e)
